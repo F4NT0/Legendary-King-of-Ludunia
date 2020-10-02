@@ -30,7 +30,7 @@
 #tittle{
     position: relative;
     left: 1190px;
-    font-family: 'fantoEspecial';
+    font-family: 'Nova Flat', cursive;
     font-size: 50px;
     color: gold;
     width: 400px;
@@ -44,7 +44,7 @@
     width: 500px;
     height: 0px;
     color: lightblue;
-    font-family: 'fantoEspecial';
+    font-family: 'Nova Flat', cursive;;
     font-size: 40px;
 }
 
@@ -56,7 +56,7 @@
     width: 200px;
     height: 0px;
     color: red;
-    font-family: 'fantoEspecial';
+    font-family: 'Nova Flat', cursive;;
     font-size: 40px;
 }
 
@@ -77,7 +77,7 @@ input{
     top: 835px;
     left: 90px;
     width: 895px;
-    font-family: 'fantoEspecial';
+    font-family: 'Nova Flat', cursive;;
     background-color: transparent;
     font-style: normal;
     font-size: 40px;
