@@ -1,0 +1,102 @@
+
+/* IDS */
+
+#squareentrance{
+    top: 790px;
+    left: 0px;
+    width: 1090px;
+    height: 160px;
+}
+
+#squareinput{
+    top: 0px;
+    left: 1080px;
+    width: 620px;
+    height: 955px;
+    
+}
+
+#textinfos{
+    position: relative;
+    background-color: transparent;
+    left: 1130px;
+    top: -50px;
+    width: 510px;
+    height: 600px;
+    color: white;
+    border: transparent;
+}
+
+#tittle{
+    position: relative;
+    left: 1190px;
+    font-family: 'fantoEspecial';
+    font-size: 50px;
+    color: gold;
+    width: 400px;
+}
+
+#option1{
+    position: relative;
+    background: red;
+    left: 1150px;
+    top: -110px;
+    width: 500px;
+    height: 0px;
+    color: lightblue;
+    font-family: 'fantoEspecial';
+    font-size: 40px;
+}
+
+#option2{
+    position: relative;
+    background: blue;
+    left: 1400px;   
+    top: -150px;
+    width: 200px;
+    height: 0px;
+    color: red;
+    font-family: 'fantoEspecial';
+    font-size: 40px;
+}
+
+
+/* TAGS */
+
+img{
+    position: absolute;
+}
+
+button{
+    position: relative;
+    top: 900px;
+}
+
+input{
+    position:relative;
+    top: 835px;
+    left: 90px;
+    width: 895px;
+    font-family: 'fantoEspecial';
+    background-color: transparent;
+    font-style: normal;
+    font-size: 40px;
+    color: white;
+    border: transparent;
+
+}
+
+/* EXTENSIONS */
+
+::placeholder{
+    position: relative;
+    top: 800px;
+    color: rgb(255, 136, 0);
+}
+
+/* SPECIAL */
+
+@font-face{
+    font-family: 'fantoEspecial';
+    src: url('../../assets/font/enchantedland.otf');    
+}
