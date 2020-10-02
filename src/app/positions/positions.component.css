@@ -21,7 +21,7 @@
     position: relative;
     background-color: transparent;
     left: 1130px;
-    top: -50px;
+    top: 0px;
     width: 510px;
     height: 600px;
     color: white;
@@ -31,8 +31,9 @@
 #tittle{
     position: relative;
     left: 1190px;
+    top: 20px;
     font-family: 'Nova Flat', cursive;
-    font-size: 50px;
+    font-size: 30px;
     color: gold;
     width: 400px;
 }
@@ -41,24 +42,24 @@
     position: relative;
     background: red;
     left: 1150px;
-    top: -110px;
+    top: 0px;
     width: 500px;
     height: 0px;
     color: lightblue;
     font-family: 'Nova Flat', cursive;;
-    font-size: 40px;
+    font-size: 25px;
 }
 
 #option2{
     position: relative;
     background: blue;
     left: 1400px;   
-    top: -150px;
+    top: -30px;
     width: 200px;
     height: 0px;
     color: red;
     font-family: 'Nova Flat', cursive;;
-    font-size: 40px;
+    font-size: 25px;
 }
 
 
