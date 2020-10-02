@@ -1,0 +1,28 @@
+/* IDS */
+
+#hero1{
+    top: 15px;
+    left: 22px;
+    width: 60px;
+    height: 60px;
+}
+
+#hero2{
+    top: 712px;
+    left: 990px;
+    width: 60px;
+    height: 60px;
+}
+
+#crown{
+    top: 330px;
+    left: 510px;
+    width: 60px;
+    height: 60px;
+}
+
+/* TAGS */
+
+img{
+    position: absolute;
+}
