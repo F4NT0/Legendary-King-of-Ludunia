@@ -207,7 +207,7 @@ function moveTest(choose: string){
     }
     if(heroSelection == 2){
       let result = <HTMLInputElement>document.getElementById("textinfos");
-      let message = "\nApós verificar seus equipamentos e itens importantes, você toma coragem e confiança e avança para dentro da Masmorra escura a sua frente com uma Tocha na mão esquerda e uma espada na mão direita\n\nOlhando mais de perto o Corredor a sua frente você consegue ver uma mensagem escrita com sangue na parede onde diz\n\nQUEM ENTRAR NESSA MASMORRA SABERÁ A VERDADE E A VERDADE O DEVORARÁ!"
+      let message = "\nApós verificar seus equipamentos e itens importantes, você toma coragem e confiança e avança para dentro da Masmorra escura a sua frente com uma Tocha na mão esquerda e uma espada na mão direita\n\nOlhando mais de perto o Corredor a sua frente você consegue ver uma mensagem escrita com sangue na parede onde diz\n\nQUEM ENTRAR NESSA MASMORRA SABERÁ A VERDADE E A VERDADE O DEVORARÁ!\n\n[FIM DA DEMO, OBRIGADO POR TESTAR]"
       movements.hero2p1();//Teste de Movimento
       result.value = message;
 
