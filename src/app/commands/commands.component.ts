@@ -24,6 +24,7 @@ interface Player1 {
   life: number;
   maxlife: number;
   heroSelection: number;
+  color: string;
 }
 
 // Objeto Player 2
@@ -32,10 +33,11 @@ interface Player2 {
   life: number;
   maxlife: number;
   heroSelection: number;
+  color: string;
 }
 
-var player1: Player1 = {name: "",life: 0,maxlife: 0,heroSelection: 0};
-var player2: Player2 = {name: "",life: 0,maxlife: 0,heroSelection: 0};
+var player1: Player1 = {name: "",life: 0,maxlife: 0,heroSelection: 0,color: ""};
+var player2: Player2 = {name: "",life: 0,maxlife: 0,heroSelection: 0,color: ""};
 
 /**
  * Método para pegar todas as Ações do Teclado com Enter
@@ -147,6 +149,8 @@ function reset(){
   player2.life = 0;
   player1.maxlife = 0;
   player2.maxlife = 0;
+  player1.color = "";
+  player2.color = "";
   console.log('Resetado Jogador 1',player1.heroSelection);
   console.log('Resetado Jogador 2',player2.heroSelection);
 
@@ -242,9 +246,11 @@ function selection(entrance: string){
     //Salvando a Escolha
     if(player == 1){
       player1.heroSelection = heroSelection;
+      player1.color = 'blue';
     }
     if(player == 2){
       player2.heroSelection = heroSelection;
+      player2.color = 'blue';
     }
 
 
@@ -257,9 +263,11 @@ function selection(entrance: string){
     //Salvando a Escolha
     if(player == 1){
       player1.heroSelection = heroSelection;
+      player1.color = 'red';
     }
     if(player == 2){
       player2.heroSelection = heroSelection;
+      player2.color = 'red';
     }
   }
 
@@ -290,16 +298,10 @@ function defineName1(name: string){
   console.log('Valor do Jogador 2 no defineName1: ',player2.heroSelection);
 
   //Alterando Valor no Título
-  if(player1.heroSelection == 1){
-    let dados = document.getElementById("tittle");
-    dados.style.color = 'lightblue';
-    dados.textContent = heroName + " : " + vida.toString() + " / " + maxVida.toString();
-  }
-  if(player1.heroSelection == 2){
-    let dados = document.getElementById("tittle");
-    dados.style.color = 'red';
-    dados.textContent = heroName + " : " + vida.toString() + " / " + maxVida.toString();
-  }
+  let dados = document.getElementById("tittle");
+  dados.style.color = player1.color;
+  dados.textContent = heroName + " : " + vida.toString() + " / " + maxVida.toString();
+  
 
   //Iniciando nova Etapa
   if(player2.heroSelection == 0){
@@ -354,16 +356,9 @@ function defineName2(name: string){
   console.log('Valor do Jogador 2 no defineName2: ',player2.heroSelection);
 
   //Alterando Valor no Título
-  if(player2.heroSelection == 1){
-    let dados = document.getElementById("tittle");
-    dados.style.color = 'lightblue';
-    dados.textContent = heroName + " : " + vida.toString() + " / " + maxVida.toString();
-  }
-  if(player2.heroSelection == 2){
-    let dados = document.getElementById("tittle");
-    dados.style.color = 'red';
-    dados.textContent = heroName + " : " + vida.toString() + " / " + maxVida.toString();
-  }
+  let dados = document.getElementById("tittle");
+  dados.style.color = player2.color;
+  dados.textContent = heroName + " : " + vida.toString() + " / " + maxVida.toString();
 
   //Iniciando nova Etapa
   if(player1.heroSelection == 0){
@@ -404,7 +399,7 @@ function moveTest(choose: string){
   if(choose == 'inicio'){
 
     let dados = document.getElementById("tittle");
-    dados.style.color = 'lightblue';
+    dados.style.color = player1.color;
     dados.textContent = player1.name + " : " + player1.life.toString() + " / " + player1.maxlife.toString();
 
     let result = <HTMLInputElement>document.getElementById("textinfos");
@@ -427,7 +422,7 @@ function moveTest(choose: string){
   //Jogador 2 action 1
   if(choose == 'avançar'){
     let dados = document.getElementById("tittle");
-    dados.style.color = 'red';
+    dados.style.color = player2.color;
     dados.textContent = player2.name + " : " + player2.life.toString() + " / " + player2.maxlife.toString();
 
     let result = <HTMLInputElement>document.getElementById("textinfos");
@@ -452,7 +447,7 @@ function moveTest(choose: string){
   //Resultado Jogador 1
   if(choose == 'seguir reto'){
     let dados = document.getElementById("tittle");
-    dados.style.color = 'lightblue';
+    dados.style.color = player1.color;
     dados.textContent = player1.name + " : " + player1.life.toString() + " / " + player1.maxlife.toString();
 
     let result = <HTMLInputElement>document.getElementById("textinfos");
@@ -473,7 +468,7 @@ function moveTest(choose: string){
   if(choose == 'seguir corredor'){
 
     let dados = document.getElementById("tittle");
-    dados.style.color = 'red';
+    dados.style.color = player2.color;
     dados.textContent = player2.name + " : " + player2.life.toString() + " / " + player2.maxlife.toString();
 
     let result = <HTMLInputElement>document.getElementById("textinfos");
@@ -494,7 +489,7 @@ function moveTest(choose: string){
   if(choose == 'voltar para fora'){
 
     let dados = document.getElementById("tittle");
-    dados.style.color = 'lightblue';
+    dados.style.color = player1.color;
     dados.textContent = player1.name + " : " + player1.life.toString() + " / " + player1.maxlife.toString();
 
     movements.hero1begin();
@@ -517,7 +512,7 @@ function moveTest(choose: string){
   //Resultado saindo jogador 2
   if(choose == "voltar pela caverna"){
     let dados = document.getElementById("tittle");
-    dados.style.color = 'red';
+    dados.style.color = player2.color;
     dados.textContent = player2.name + " : " + player2.life.toString() + " / " + player2.maxlife.toString();
     
     movements.hero2begin();
@@ -545,7 +540,7 @@ function moveTest(choose: string){
     //Retirando a Vida
     player2.life = 0;
     let dados = document.getElementById("tittle");
-    dados.style.color = 'red';
+    dados.style.color = player2.color;
     dados.textContent = player2.name + " : " + player2.life.toString() + " / " + player2.maxlife.toString();
   
     let option1 = document.getElementById("option1");
@@ -560,7 +555,7 @@ function moveTest(choose: string){
   if(choose == "voltar a cidade"){
 
     let dados = document.getElementById("tittle");
-    dados.style.color = 'lightblue';
+    dados.style.color = player1.color;
     dados.textContent = player1.name + " : " + player1.life.toString() + " / " + player1.maxlife.toString();
 
     let result = <HTMLInputElement>document.getElementById("textinfos");
@@ -580,7 +575,7 @@ function moveTest(choose: string){
   if(choose == "voltar para dentro"){
 
     let dados = document.getElementById("tittle");
-    dados.style.color = 'lightblue';
+    dados.style.color = player1.color;
     dados.textContent = player1.name + " : " + player1.life.toString() + " / " + player1.maxlife.toString();
 
     let result = <HTMLInputElement>document.getElementById("textinfos");
@@ -600,7 +595,7 @@ function moveTest(choose: string){
   if(choose == "retornar para dentro"){
 
     let dados = document.getElementById("tittle");
-    dados.style.color = 'red';
+    dados.style.color = player2.color;
     dados.textContent = player2.name + " : " + player2.life.toString() + " / " + player2.maxlife.toString();
 
     let result = <HTMLInputElement>document.getElementById("textinfos");
