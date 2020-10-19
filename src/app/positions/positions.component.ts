@@ -40,12 +40,15 @@ export class PositionsComponent implements OnInit{
       let action = <HTMLInputElement>document.getElementById("entrada");
 
       // Enviar a ação para o Componente commands globalmente
-      //history.getAction(action.value);
+      history.getAction(action.value);
 
-      //Se for entrado um nome de jogador
-      console.log(action.value.substr(0,5));
-      if(action.value.substr(0,5) == 'nome:'){
-        this.definePlayer(action.value.substr(5,action.value.length));
+      //Se for entrado um nome de jogador 1
+      if(action.value.substr(0,9) == 'jogador1:'){
+        this.definePlayer(action.value.substr(9,action.value.length));
+      }
+      //Se for entrado um nome de jogador 2
+      if(action.value.substr(0,9) == 'jogador2:'){
+        this.definePlayer(action.value.substr(9,action.value.length));
       }
 
       //Enviar ao Servidor

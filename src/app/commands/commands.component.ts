@@ -17,6 +17,25 @@ var vida: number = null;
 var maxVida: number = null;
 var heroSelection: number = 0; // 1 é o Azul e 2 é o Vermelho
 
+// Objeto Player 1
+interface Player1 {
+  name: string;
+  life: number;
+  maxlife: number;
+  heroSelection: number;
+}
+
+// Objeto Player 2
+interface Player2 {
+  name: string;
+  life: number;
+  maxlife: number;
+  heroSelection: number;
+}
+
+var player1: Player1 = {name: "",life: 0,maxlife: 0,heroSelection: 0};
+var player2: Player2 = {name: "",life: 0,maxlife: 0,heroSelection: 0};
+
 /**
  * Método para pegar todas as Ações do Teclado com Enter
  * @param action1
@@ -33,17 +52,25 @@ export function getAction(action1: string){
  */
 function commandManager(option: string){
   //Definindo Nome do Jogador
-  if(option.substr(0,5) == 'nome:'){
+  if(option.substr(0,9) == 'jogador1:'){
     console.log('Acessou Aqui');
-    defineName(option);
+    defineName1(option);
+  }
+  if(option.substr(0,9) == 'jogador2:'){
+    console.log('Acessou Aqui');
+    defineName2(option);
   }
   
   //Comandos Disponiveis no jogo
   switch(option){
-    case 'play' : {selection(option); break;}
+    case 'play' : {choosePlayer(option); break;}
     case 'cancelar': {welcome(); break;}
     
     // ESCOLHER PERSONAGEM
+    case 'jogador 1' : {selection(option); break;}
+    case 'jogador 2' : {selection(option); break;}
+    case 'definir 1' : {selection(option); break;}
+    case 'definir 2' : {selection(option); break;}
     case 'azul' : {selection(option); break;}
     case 'vermelho' : {selection(option); break;}
 
@@ -91,13 +118,31 @@ export function welcome(){
   option2.textContent = optionMessage2;
 }
 
+function choosePlayer(entrance: string){
+  let result = <HTMLInputElement>document.getElementById("textinfos");
+  let select = "\n Se prepare!\n\n Qual Jogador você deseja ser:\n\n [JOGADOR 1] \n\n [JOGADOR 2]"
+  result.value = select;
+
+  //Opção 1
+  let optionMessage1 = "Jogador 1";
+  let option1 = document.getElementById("option1");
+  option1.textContent = optionMessage1;
+
+  //Opção 2
+  let optionMessage2 = "Jogador 2";
+  let option2 = document.getElementById("option2");
+  option2.textContent = optionMessage2;
+
+
+}
+
 /**
  * Seleciona qual Personagem Jogar
  * @param entrance 
  */
 function selection(entrance: string){
   let result = <HTMLInputElement>document.getElementById("textinfos");
-  let select = "\n[PRÓLOGO VERMELHO]\n\nApós a Descoberta da Localização da Coroa, o Rei Gandalf, que queria o Trono de Ludunia, Envia seu melhor Cavaleiro para recuperar a coroa, conhecido como o Cavaleiro Vermelho! \n\n\n[PRÓLOGO AZUL]\n\nO Regente de Ludunia, querendo proteger seu povo de outros Reinos envia o Chefe da Armada de Ludunia,que também é seu filho, para recuperar a coroa perdida, Ele é conhecido como Cavaleiro Azul \n\n\n Qual dos Dois Cavaleiros você deseja jogar?"
+  let select = "\n[PRÓLOGO VERMELHO]\n\nApós a Descoberta da Localização da Coroa, o Rei Gandalf, que queria o Trono de Ludunia, Envia seu melhor Cavaleiro para recuperar a coroa, conhecido como o Cavaleiro Vermelho! \n\n\n[PRÓLOGO AZUL]\n\nO Regente de Ludunia, querendo proteger seu povo de outros Reinos envia o Chefe da Armada de Ludunia,que também é seu filho, para recuperar a coroa perdida, Ele é conhecido como Cavaleiro Azul \n\n\n Selecione Qual Personagem você deseja jogar!"
   result.value = select
 
   //Opção 1
@@ -110,17 +155,56 @@ function selection(entrance: string){
   let option2 = document.getElementById("option2");
   option2.textContent = optionMessage2;
 
+  if(entrance == 'definir 1'){
+    if(player2.heroSelection == 1){
+      let result = <HTMLInputElement>document.getElementById("textinfos");
+      let mensagem = "\n\n[JOGADOR 2 JÁ ESCOLHEU O AZUL]\n\n"
+      result.value += mensagem;
+    }
+    if(player2.heroSelection == 2){
+      let result = <HTMLInputElement>document.getElementById("textinfos");
+      let mensagem = "\n\n[JOGADOR 2 JÁ ESCOLHEU O VERMELHO]\n\n"
+      result.value += mensagem;
+    }
+  }else if(entrance == 'definir 2'){
+    if(player1.heroSelection == 1){
+      let result = <HTMLInputElement>document.getElementById("textinfos");
+      let mensagem = "\n\n[JOGADOR 1 JÁ ESCOLHEU O AZUL]\n\n"
+      result.value += mensagem;
+    }
+    if(player1.heroSelection == 2){
+      let result = <HTMLInputElement>document.getElementById("textinfos");
+      let mensagem = "\n\n[JOGADOR 1 JÁ ESCOLHEU O VERMELHO]\n\n"
+      result.value += mensagem;
+    }
+  }
+
   // Resposta
   if(entrance == 'azul'){
     let result = <HTMLInputElement>document.getElementById("textinfos");
-    let mensagem = "Digite o Nome do seu Herói na Seguinte estrutura: \n\n nome:nomeHeroi \n\n"
+    let mensagem = "Digite o Nome do seu Herói na Seguinte estrutura: \n\n jogador1:nomeHeroi ou jogador2:nomeHeroi \n\n"
     result.value = mensagem;
     heroSelection = 1;
+
+    //Salvando a Escolha
+    if(player1.heroSelection == 0){
+      player1.heroSelection = heroSelection;
+    }else{
+      player2.heroSelection = heroSelection;
+    }
+
+
   }else if(entrance == 'vermelho'){
     let result = <HTMLInputElement>document.getElementById("textinfos");
-    let mensagem = "Digite o Nome do seu Herói na Seguinte estrutura: \n\n nome:nomeHeroi \n\n"
+    let mensagem = "Digite o Nome do seu Herói na Seguinte estrutura: \n\n jogador1:nomeHeroi ou jogador2:nomeHeroi \n\n"
     result.value = mensagem;
     heroSelection = 2;
+    
+    if(player1.heroSelection == 0){
+      player1.heroSelection = heroSelection;
+    }else{
+      player2.heroSelection = heroSelection
+    }
   }
 
   
@@ -130,41 +214,122 @@ function selection(entrance: string){
  * Define o Nome do Jogador
  * @param name 
  */
-function defineName(name: string){
-  let nomeHeroi = name.substring(5,name.length);
+function defineName1(name: string){
+  let nomeHeroi = name.substring(9,name.length);
   let result = <HTMLInputElement>document.getElementById("textinfos");
   let saida = "\n[UPDATE]\n\nNome do Seu Herói é " + nomeHeroi;
   heroName = nomeHeroi;
   result.value += saida;
 
+  //Salvando Nome do Herói
+  player1.name = heroName;
+
   //Definindo Vida
   vida = 100;
+  player1.life = vida;
   maxVida = 100;
+  player1.maxlife = maxVida;
 
   //Alterando Valor no Título
-  if(heroSelection == 1){
+  if(player1.heroSelection == 1){
     let dados = document.getElementById("tittle");
     dados.style.color = 'lightblue';
     dados.textContent = heroName + " : " + vida.toString() + " / " + maxVida.toString();
   }
-  if(heroSelection == 2){
+  if(player1.heroSelection == 2){
     let dados = document.getElementById("tittle");
     dados.style.color = 'red';
     dados.textContent = heroName + " : " + vida.toString() + " / " + maxVida.toString();
   }
 
   //Iniciando nova Etapa
-  result.value += "\n\nTudo Pronto para a Aventura! \n\n Digite [inicio] para começar o Jogo";
+  if(player2.heroSelection == 0){
+    result.value += "\n\nVez do Jogador 2 definir seu personagem\n\n Escreva [definir 2] para começar o jogador 2";
 
-  //OPÇÃO 1
-  let optionMessage1 = "inicio";
-  let option1 = document.getElementById("option1");
-  option1.textContent = optionMessage1;
+    //OPÇÃO 1
+    let optionMessage1 = "definir 2";
+    let option1 = document.getElementById("option1");
+    option1.textContent = optionMessage1;
 
-  //OPÇÃO 2
-  let optionMessage2 = "cancelar";
-  let option2 = document.getElementById("option2");
-  option2.textContent = optionMessage2;
+    //OPÇÃO 2
+    let optionMessage2 = "cancelar";
+    let option2 = document.getElementById("option2");
+    option2.textContent = optionMessage2;
+
+  }else{
+    result.value += "\n\nTudo Pronto para a Aventura! \n\n Digite [inicio] para começar o Jogo";
+
+    //OPÇÃO 1
+    let optionMessage1 = "inicio";
+    let option1 = document.getElementById("option1");
+    option1.textContent = optionMessage1;
+
+    //OPÇÃO 2
+    let optionMessage2 = "cancelar";
+    let option2 = document.getElementById("option2");
+    option2.textContent = optionMessage2;
+  }
+}
+
+/**
+ * Define o Nome do Jogador
+ * @param name 
+ */
+function defineName2(name: string){
+  let nomeHeroi = name.substring(9,name.length);
+  let result = <HTMLInputElement>document.getElementById("textinfos");
+  let saida = "\n[UPDATE]\n\nNome do Seu Herói é " + nomeHeroi;
+  heroName = nomeHeroi;
+  result.value += saida;
+
+  //Salvando Nome do Herói
+  player2.name = heroName;
+
+  //Definindo Vida
+  vida = 100;
+  player2.life = vida;
+  maxVida = 100;
+  player2.maxlife = maxVida;
+
+  //Alterando Valor no Título
+  if(player2.heroSelection == 1){
+    let dados = document.getElementById("tittle");
+    dados.style.color = 'lightblue';
+    dados.textContent = heroName + " : " + vida.toString() + " / " + maxVida.toString();
+  }
+  if(player2.heroSelection == 2){
+    let dados = document.getElementById("tittle");
+    dados.style.color = 'red';
+    dados.textContent = heroName + " : " + vida.toString() + " / " + maxVida.toString();
+  }
+
+  //Iniciando nova Etapa
+  if(player1.heroSelection == 0){
+    result.value += "Vez do Jogador 1 definir seu personagem\n\n Escreva [definir 1] para começar o jogador 1";
+
+    //OPÇÃO 1
+    let optionMessage1 = "definir 1";
+    let option1 = document.getElementById("option1");
+    option1.textContent = optionMessage1;
+
+    //OPÇÃO 2
+    let optionMessage2 = "cancelar";
+    let option2 = document.getElementById("option2");
+    option2.textContent = optionMessage2;
+
+  }else{
+    result.value += "\n\nTudo Pronto para a Aventura! \n\n Digite [inicio] para começar o Jogo";
+
+    //OPÇÃO 1
+    let optionMessage1 = "inicio";
+    let option1 = document.getElementById("option1");
+    option1.textContent = optionMessage1;
+
+    //OPÇÃO 2
+    let optionMessage2 = "cancelar";
+    let option2 = document.getElementById("option2");
+    option2.textContent = optionMessage2;
+  }
 }
 
 

@@ -45,7 +45,7 @@ io.on("connection", function (client) {
     });
 
     client.on("disconnect", function(){
-    	console.log("Disconnect");
+    	//console.log("Disconnect");
         io.emit("update", clients[client.id] + " has left the server.");
         delete clients[client.id];
     });

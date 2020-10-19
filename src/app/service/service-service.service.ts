@@ -27,8 +27,6 @@ export class ServiceServiceService {
     console.log('Enviando para o Servidor: ',message);
     //Enviando ao Servidor o comando
     this.socket.emit("send", message);
-
-    //Recebendo de volta a Resposta
     
   }
 
