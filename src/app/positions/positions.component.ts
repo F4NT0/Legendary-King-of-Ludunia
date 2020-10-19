@@ -3,9 +3,12 @@ import { Component, HostListener, OnInit } from '@angular/core';
 // Internal
 import * as history from '../commands/commands.component';
 
+// Import Leitura do Arquivo do Servidor
+
 //Primeng
 import { InputTextModule } from 'primeng/inputtext/inputtext';
 import { InputTextareaModule } from 'primeng/inputtextarea/inputtextarea';
+import { ServiceServiceService } from '../service/service-service.service';
 
 @Component({
   selector: 'app-positions',
@@ -16,8 +19,11 @@ export class PositionsComponent implements OnInit{
   // Variáveis
   enter: number = 0;
   entrada: string;
-  
-  constructor() {}
+  service: ServiceServiceService;
+
+  constructor() {
+    this.service = new ServiceServiceService();
+  }
 
   ngOnInit(){
     history.welcome(); //Inicio do Jogo
@@ -29,15 +35,33 @@ export class PositionsComponent implements OnInit{
     this.enter = event.keyCode;
     console.log(event.keyCode);
     if(this.enter == 13){ // 13 é o Enter do Teclado
-      
+
       // Pega todos os dados do id entrada (input de comandos)
-      let action = <HTMLInputElement>document.getElementById("entrada"); 
+      let action = <HTMLInputElement>document.getElementById("entrada");
 
       // Enviar a ação para o Componente commands globalmente
-      history.getAction(action.value);
-      
+      //history.getAction(action.value);
+
+      //Se for entrado um nome de jogador
+      console.log(action.value.substr(0,5));
+      if(action.value.substr(0,5) == 'nome:'){
+        this.definePlayer(action.value.substr(5,action.value.length));
+      }
+
+      //Enviar ao Servidor
+      this.sendMessage(action.value);
+
+      //Pegando Resultado do Servidor
+
       action.value = null;
     }
   }
-  
+
+  public sendMessage(ms: string) {
+    this.service.emitMessageProServ(ms);
+  }
+
+  public definePlayer(name: string){
+    this.service.joinPlayer(name);
+  }
 }
