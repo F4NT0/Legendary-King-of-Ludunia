@@ -64,7 +64,7 @@ function commandManager(option: string){
   //Comandos Disponiveis no jogo
   switch(option){
     case 'play' : {choosePlayer(option); break;}
-    case 'cancelar': {welcome(); break;}
+    case 'cancelar': {reset(); break;}
     
     // ESCOLHER PERSONAGEM
     case 'jogador 1' : {selection(option); break;}
@@ -87,7 +87,8 @@ function commandManager(option: string){
     case 'retornar para dentro':{moveTest(option); break;}
 
     //Movimento Aleatorio
-    case 'random': {}
+    case 'random1': {randomMove();break;}
+    case 'random2': {randomMove2();break;}
 
   }
 }
@@ -104,6 +105,47 @@ export function welcome(){
   //Reorientar os Jogadores
   movements.hero1begin();
   movements.hero2begin();
+
+  // Mensagem
+  let result = <HTMLInputElement>document.getElementById("textinfos");
+  let welcome = "\n\n Ludunia já foi um dos grandes Reinos do Mundo de Vita, onde o povo vivia feliz e em Harmonia. \n\n Após anos de Tranquilidade, as Forças do Mal lideradas pelo Litch King, o grande Rei das Trevas, começou a se espalhar pelos Reinos, destruindo tudo pelo seu caminho. \n\n O Rei Ragnar, grande lider do Povo de Ludunia, juntou seu Exército e marchou para lutar contra o Grande Mal, onde após anos de luta conseguiu vencer o Exército Maldito, mas após vencer o inimigo, o Grande Rei Ragnar morre junto com o Litch King em Batalha, deixando a vida e seu trono sem Herdeiros e com a Coroa do Grande Rei desaparecida... \n\n Após se passar anos com o Regente no poder, se descobriu o paradeiro da Coroa, onde se encontra no centro de uma Masmorra no Território da Batalha onde foi Vencido o Grande Mal! \n\n Com essa Descoberta se começou uma Caçada pela Coroa, onde quem a possuir se tornará o Rei de Ludunia!!! \n\n [DIGITE PLAY PARA INICIAR O JOGO]!";
+  result.style.fontSize = '17px';
+  result.style.fontFamily = 'Time new Roman';
+  result.value = welcome;
+
+  // Opção 1
+  let optionMessage = "play";
+  let option = document.getElementById("option1");
+  option.style.color = 'lightblue';
+  option.textContent = optionMessage;
+
+  // Opção 2
+  let optionMessage2 = "cancelar";
+  let option2 = document.getElementById("option2");
+  option2.style.color = 'red';
+  option2.textContent = optionMessage2;
+
+}
+
+function reset(){
+  // Título
+  let titulo = document.getElementById("tittle");
+  titulo.style.color = 'gold';
+  titulo.textContent = "Legendary King of Ludunia";
+
+  //Reorientar os Jogadores
+  movements.hero1begin();
+  movements.hero2begin();
+
+  //Zerar Jogadores
+  player1.name = "";
+  player2.name = "";
+  player1.heroSelection = 0;
+  player2.heroSelection = 0;
+  player1.life = 0;
+  player2.life = 0;
+  player1.maxlife = 0;
+  player2.maxlife = 0;
 
   // Mensagem
   let result = <HTMLInputElement>document.getElementById("textinfos");
@@ -339,7 +381,6 @@ function defineName2(name: string){
   }
 }
 
-
 // ==========
 //  MISSÕES
 // ==========
@@ -397,22 +438,31 @@ function moveTest(choose: string){
 
   //Resultado Jogador 1
   if(choose == 'seguir reto'){
-      let result = <HTMLInputElement>document.getElementById("textinfos");
-      let message = "\nApós verificar seus equipamentos e itens importantes, você toma coragem e confiança e avança para dentro da Masmorra escura a sua frente com uma Tocha na mão esquerda e uma espada na mão direita\n\nOlhando mais de perto o Corredor a sua frente você consegue ver uma mensagem escrita com sangue na parede onde diz\n\nQUEM ENTRAR NESSA MASMORRA SABERÁ A VERDADE E A VERDADE O DEVORARÁ!"
-      movements.hero1p1();//Teste de Movimento
-      result.value = message;
+    let dados = document.getElementById("tittle");
+    dados.style.color = 'lightblue';
+    dados.textContent = player1.name + " : " + player1.life.toString() + " / " + player1.maxlife.toString();
 
-      let option1 = document.getElementById("option1");
-      let optionMsg1 = "avançar";
-      option1.textContent = optionMsg1;
+    let result = <HTMLInputElement>document.getElementById("textinfos");
+    let message = "\nApós verificar seus equipamentos e itens importantes, você toma coragem e confiança e avança para dentro da Masmorra escura a sua frente com uma Tocha na mão esquerda e uma espada na mão direita\n\nOlhando mais de perto o Corredor a sua frente você consegue ver uma mensagem escrita com sangue na parede onde diz\n\nQUEM ENTRAR NESSA MASMORRA SABERÁ A VERDADE E A VERDADE O DEVORARÁ!"
+    movements.hero1p1();//Teste de Movimento
+    result.value = message;
+
+    let option1 = document.getElementById("option1");
+    let optionMsg1 = "avançar";
+    option1.textContent = optionMsg1;
   
-      let option2 = document.getElementById("option2");
-      let optionMsg2 = "cancelar";
-      option2.textContent = optionMsg2;
+    let option2 = document.getElementById("option2");
+    let optionMsg2 = "cancelar";
+    option2.textContent = optionMsg2;
   }
 
   //Resultado Jogador 2
   if(choose == 'seguir corredor'){
+
+    let dados = document.getElementById("tittle");
+    dados.style.color = 'red';
+    dados.textContent = player2.name + " : " + player2.life.toString() + " / " + player2.maxlife.toString();
+
     let result = <HTMLInputElement>document.getElementById("textinfos");
     let message = "\nApós verificar seus equipamentos e itens importantes, você toma coragem e confiança e avança para dentro da Masmorra escura a sua frente com uma Tocha na mão esquerda e uma espada na mão direita\n\nVocê sente uma Força enorme te puxando para o Corredor escuro e com uma Força fenomenal, você desaparece dentro do Escuro..."
     movements.hero2p1();//Teste de Movimento
@@ -429,6 +479,11 @@ function moveTest(choose: string){
 
   //Resultado saindo jogador 1
   if(choose == 'voltar para fora'){
+
+    let dados = document.getElementById("tittle");
+    dados.style.color = 'lightblue';
+    dados.textContent = player1.name + " : " + player1.life.toString() + " / " + player1.maxlife.toString();
+
     movements.hero1begin();
     let result = <HTMLInputElement>document.getElementById("textinfos");
     let message = "\nPor uma Força maior você reconsidera entrar na Masmorra, talvez por ter sentido algum mal vindo daquele corredor e temendo por sua vida você deseja sair daquele lugar.\n\n Retornando ao seu Cavalo que espera na rua, você consegue ver a chave dourada que você recebeu de seu pai, que por ter escolhido você como o Cavaleiro que iria salvar o Reino de Ludunia tinha esperanças no retorno da Coroa e por isso lhe deu a Chave da cidade para poder voltar a qualquer momento e isso lhe pesou muito na Consciência\n\n O que o Cavaleiro " + heroName + " irá fazer?"
@@ -448,20 +503,24 @@ function moveTest(choose: string){
 
   //Resultado saindo jogador 2
   if(choose == "voltar pela caverna"){
+    let dados = document.getElementById("tittle");
+    dados.style.color = 'red';
+    dados.textContent = player2.name + " : " + player2.life.toString() + " / " + player2.maxlife.toString();
+    
     movements.hero2begin();
-      let result = <HTMLInputElement>document.getElementById("textinfos");
-      let message = "\nVocê desiste de querer entrar na Masmorra e consegue voltar para a Saída da caverna por onde você entrou.\n\nApós ver a luz do sol novamente, você consegue ver um grupo de Mercenários vindo em sua Direção, onde o Líder deles fala:\n[LÍDER]: O que você está fazendo fora da caverna? O seu Rei nos contratou para ficarmos de olho em você e para não deixar que você saia da Masmorra sem a Coroa, volte lá para dentro imediatamente ou teremos que usar a força\n\n O que o Cavaleiro " + heroName + " irá fazer?"
-      result.value = message;
+    let result = <HTMLInputElement>document.getElementById("textinfos");
+    let message = "\nVocê desiste de querer entrar na Masmorra e consegue voltar para a Saída da caverna por onde você entrou.\n\nApós ver a luz do sol novamente, você consegue ver um grupo de Mercenários vindo em sua Direção, onde o Líder deles fala:\n[LÍDER]: O que você está fazendo fora da caverna? O seu Rei nos contratou para ficarmos de olho em você e para não deixar que você saia da Masmorra sem a Coroa, volte lá para dentro imediatamente ou teremos que usar a força\n\n O que o Cavaleiro " + heroName + " irá fazer?"
+    result.value = message;
       
-      //Opção de Lutar
-      let option1 = document.getElementById("option1");
-      let optionMsg1 = "lutar com mercenarios";
-      option1.textContent = optionMsg1;
+    //Opção de Lutar
+    let option1 = document.getElementById("option1");
+    let optionMsg1 = "lutar com mercenarios";
+    option1.textContent = optionMsg1;
 
-      //Opção de Voltar para dentro
-      let option2 = document.getElementById("option2");
-      let optionMsg2 = "retornar para dentro";
-      option2.textContent = optionMsg2;
+    //Opção de Voltar para dentro
+    let option2 = document.getElementById("option2");
+    let optionMsg2 = "retornar para dentro";
+    option2.textContent = optionMsg2;
   }
 
   //Resultado luta jogador 2
@@ -473,6 +532,7 @@ function moveTest(choose: string){
     //Retirando a Vida
     player2.life = 0;
     let dados = document.getElementById("tittle");
+    dados.style.color = 'red';
     dados.textContent = player2.name + " : " + player2.life.toString() + " / " + player2.maxlife.toString();
   
     let option1 = document.getElementById("option1");
@@ -485,6 +545,11 @@ function moveTest(choose: string){
 
   //Resultado final jogador 1
   if(choose == "voltar a cidade"){
+
+    let dados = document.getElementById("tittle");
+    dados.style.color = 'lightblue';
+    dados.textContent = player1.name + " : " + player1.life.toString() + " / " + player1.maxlife.toString();
+
     let result = <HTMLInputElement>document.getElementById("textinfos");
     let message = "\n[GAME OVER]\n\nApós uma Jornada exaustiva de volta para o seu Reino de mãos vazias, você consegue ver ao longe que a Capital do Reino de Ludunia, onde ficava o seu pai, estava em chamas!\n\nCavalgando mais forte para chegar em casa você consegue ver melhor que a Bandeira encontrada na frente da Cidade é do Reino inimigo de Ludunia,com isso, você finalmente entendeu que haviam mandado um Cavaleiro do Reino do Rei Gandalf e haviam recuperado a Coroa e voltaram para conquistar o trono de Ludunia, onde o povo foi dizimado e seu pai também, deixando você como o último Cavaleiro de Ludunia e odiado por todos por ter Desertado \n\n Digite [cancelar] para reiniciar o Jogo"
     result.value = message;
@@ -500,6 +565,11 @@ function moveTest(choose: string){
 
   //Resultado jogador 1
   if(choose == "voltar para dentro"){
+
+    let dados = document.getElementById("tittle");
+    dados.style.color = 'lightblue';
+    dados.textContent = player1.name + " : " + player1.life.toString() + " / " + player1.maxlife.toString();
+
     let result = <HTMLInputElement>document.getElementById("textinfos");
     let message = "\nVendo que por Forças Maiores era necessário voltar para a Masmorra, aproveitou um ultimo momento para respirar ar Fresco e pegar um Sol e retornou para dentro para ver o que se esconde na escuridão subterrânea";
     result.value = message;
@@ -515,6 +585,11 @@ function moveTest(choose: string){
 
   //Resultado jogador 2
   if(choose == "retornar para dentro"){
+
+    let dados = document.getElementById("tittle");
+    dados.style.color = 'red';
+    dados.textContent = player2.name + " : " + player2.life.toString() + " / " + player2.maxlife.toString();
+
     let result = <HTMLInputElement>document.getElementById("textinfos");
     let message = "\nVendo que por Forças Maiores era necessário voltar para a Masmorra, aproveitou um ultimo momento para respirar ar Fresco e pegar um Sol e retornou para dentro para ver o que se esconde na escuridão subterrânea";
     result.value = message;
@@ -529,5 +604,69 @@ function moveTest(choose: string){
   }
 
 
+}
+
+function randomMove(){
+  var value =  Math.floor(Math.random() * 27);
+  switch(value){
+    case 0: {movements.hero1begin(); break;}
+    case 1: {movements.hero1p1(); break;}
+    case 2: {movements.hero1p2(); break;}
+    case 3: {movements.hero1p3(); break;}
+    case 4: {movements.hero1p4(); break;}
+    case 5: {movements.hero1p5(); break;}
+    case 6: {movements.hero1p6(); break;}
+    case 7: {movements.hero1p7(); break;}
+    case 8: {movements.hero1p8(); break;}
+    case 9: {movements.hero1p9(); break;}
+    case 10: {movements.hero1p10(); break;}
+    case 11: {movements.hero1p11(); break;}
+    case 12: {movements.hero1final(); break;}
+    case 13: {movements.bonusb1('hero1'); break;}
+    case 14: {movements.bonusb2('hero1'); break;}
+    case 15: {movements.bonusb3('hero1'); break;}
+    case 16: {movements.bonusb4('hero1'); break;}
+    case 17: {movements.bonusb5('hero1'); break;}
+    case 18: {movements.bonusb6('hero1'); break;}
+    case 19: {movements.bonusb7('hero1'); break;}
+    case 20: {movements.bonusb8('hero1'); break;}
+    case 21: {movements.bonusb9('hero1'); break;}
+    case 22: {movements.bonusb10('hero1'); break;}
+    case 23: {movements.bonusb11('hero1'); break;}
+    case 24: {movements.bonusfinal('hero1'); break;}
+    case 25: {movements.specialesquerda('hero1'); break;}
+    case 26: {movements.specialdireita('hero1'); break;}
+  }
+}
+
+function randomMove2(){
+  var value =  Math.floor(Math.random() * 25);
+  switch(value){
+    case 0: {movements.hero2begin(); break;}
+    case 1: {movements.hero2p1(); break;}
+    case 2: {movements.hero2p2(); break;}
+    case 3: {movements.hero2p3(); break;}
+    case 4: {movements.hero2p4(); break;}
+    case 5: {movements.hero2p5(); break;}
+    case 6: {movements.hero2p6(); break;}
+    case 7: {movements.hero2p7(); break;}
+    case 8: {movements.hero2p8(); break;}
+    case 9: {movements.hero2p9(); break;}
+    case 10: {movements.hero2final(); break;}
+    case 11: {movements.bonusb1('hero2'); break;}
+    case 12: {movements.bonusb2('hero2'); break;}
+    case 13: {movements.bonusb3('hero2'); break;}
+    case 14: {movements.bonusb4('hero2'); break;}
+    case 15: {movements.bonusb5('hero2'); break;}
+    case 16: {movements.bonusb6('hero2'); break;}
+    case 17: {movements.bonusb7('hero2'); break;}
+    case 18: {movements.bonusb8('hero2'); break;}
+    case 19: {movements.bonusb9('hero2'); break;}
+    case 20: {movements.bonusb10('hero2'); break;}
+    case 21: {movements.bonusb11('hero2'); break;}
+    case 22: {movements.bonusfinal('hero2'); break;}
+    case 23: {movements.specialesquerda('hero2'); break;}
+    case 24: {movements.specialdireita('hero2'); break;}
+  }
 }
 
