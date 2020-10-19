@@ -76,11 +76,18 @@ function commandManager(option: string){
 
     // PRIMEIRA MISSÃO
     case 'inicio' : {moveTest(option); break;}
+    case 'avançar': {moveTest(option); break;}
     case 'seguir reto' : {moveTest(option); break;}
+    case 'seguir corredor' : {moveTest(option); break;}
     case 'voltar para fora' : {moveTest(option); break;}
     case 'lutar com mercenarios' : {moveTest(option); break;}
+    case 'voltar pela caverna' : {moveTest(option); break;}
     case 'voltar a cidade' : {moveTest(option); break;}
     case 'voltar para dentro' : {moveTest(option); break;}
+    case 'retornar para dentro':{moveTest(option); break;}
+
+    //Movimento Aleatorio
+    case 'random': {}
 
   }
 }
@@ -124,12 +131,12 @@ function choosePlayer(entrance: string){
   result.value = select;
 
   //Opção 1
-  let optionMessage1 = "Jogador 1";
+  let optionMessage1 = "jogador 1";
   let option1 = document.getElementById("option1");
   option1.textContent = optionMessage1;
 
   //Opção 2
-  let optionMessage2 = "Jogador 2";
+  let optionMessage2 = "jogador 2";
   let option2 = document.getElementById("option2");
   option2.textContent = optionMessage2;
 
@@ -338,56 +345,110 @@ function defineName2(name: string){
 // ==========
 
 function moveTest(choose: string){
-  let result = <HTMLInputElement>document.getElementById("textinfos");
-  let message = "\nApós dias de Viagem, finalmente chegou em seu Destino, as Terriveis Masmorras de Ergástulo!\n\nDepois de encontrar a Passagem ao Subterrâneo você se depara com uma porta bem antiga e desgastada, onde com um bom empurrão ela se move e você finalmente consegue entrar em um tipo de sala especial vazia, onde está completamente escura\n\nApós acender uma Tocha você consegue enxergar que a sala leva para um Túnel que segue em frente até um breu total, você consegue ver que só existe esse caminho para dentro da Masmorra\n\nO que o Cavaleiro " + heroName + " vai fazer?"
-  result.value = message;
 
-  //Opção 1
-  let option1 = document.getElementById("option1");
-  option1.style.color = 'lightgreen';
-  let optionMsg1 = "seguir reto";
-  option1.textContent = optionMsg1;
+  //Jogador 1 action 1
+  if(choose == 'inicio'){
 
-  //Opção 2
-  let option2 = document.getElementById("option2");
-  option2.style.color = 'yellow';
-  let optionMsg2 = "voltar para fora";
-  option2.textContent = optionMsg2;
+    let dados = document.getElementById("tittle");
+    dados.style.color = 'lightblue';
+    dados.textContent = player1.name + " : " + player1.life.toString() + " / " + player1.maxlife.toString();
 
-  //Resultados
+    let result = <HTMLInputElement>document.getElementById("textinfos");
+    let message = "\nApós dias de Viagem, finalmente chegou em seu Destino, as Terriveis Masmorras de Ergástulo!\n\nDepois de encontrar a Passagem ao Subterrâneo você se depara com uma porta bem antiga e desgastada, onde com um bom empurrão ela se move e você finalmente consegue entrar em um tipo de sala especial vazia, onde está completamente escura\n\nApós acender uma Tocha você consegue enxergar que a sala leva para um Túnel que segue em frente até um breu total, você consegue ver que só existe esse caminho para dentro da Masmorra\n\nO que o Cavaleiro " + heroName + " vai fazer?"
+    result.value = message;
+
+    //Opção 1
+    let option1 = document.getElementById("option1");
+    option1.style.color = 'lightgreen';
+    let optionMsg1 = "seguir reto";
+    option1.textContent = optionMsg1;
+
+    //Opção 2
+    let option2 = document.getElementById("option2");
+    option2.style.color = 'yellow';
+    let optionMsg2 = "voltar para fora";
+    option2.textContent = optionMsg2;
+  }
+
+  //Jogador 2 action 1
+  if(choose == 'avançar'){
+    let dados = document.getElementById("tittle");
+    dados.style.color = 'red';
+    dados.textContent = player2.name + " : " + player2.life.toString() + " / " + player2.maxlife.toString();
+
+    let result = <HTMLInputElement>document.getElementById("textinfos");
+    let message = "\nLiderado por um guia pago pelo Rei, conseguiu encontrar as Terriveis Masmorras de Ergástulo!\n\nApós ficar um tempo verificando a Região, conseguiu encontrar uma passagem para o subterrâneo, onde por fim encontrou uma porta grande e velha\n\nOlhando para o ambiente interno, você consegue ver uma sala antiga cheio de armaduras velhas e um corredor escuro a frente\n\n O que você vai fazer?"
+    result.value = message;
+
+
+    //Opção 1
+    let option1 = document.getElementById("option1");
+    option1.style.color = 'lightgreen';
+    let optionMsg1 = "seguir corredor";
+    option1.textContent = optionMsg1;
+
+    //Opção 2
+    let option2 = document.getElementById("option2");
+    option2.style.color = 'yellow';
+    let optionMsg2 = "voltar pela caverna";
+    option2.textContent = optionMsg2;
+
+  }
+
+  //Resultado Jogador 1
   if(choose == 'seguir reto'){
-    if(heroSelection == 1){
       let result = <HTMLInputElement>document.getElementById("textinfos");
       let message = "\nApós verificar seus equipamentos e itens importantes, você toma coragem e confiança e avança para dentro da Masmorra escura a sua frente com uma Tocha na mão esquerda e uma espada na mão direita\n\nOlhando mais de perto o Corredor a sua frente você consegue ver uma mensagem escrita com sangue na parede onde diz\n\nQUEM ENTRAR NESSA MASMORRA SABERÁ A VERDADE E A VERDADE O DEVORARÁ!"
       movements.hero1p1();//Teste de Movimento
       result.value = message;
 
       let option1 = document.getElementById("option1");
-      let optionMsg1 = "cancelar";
+      let optionMsg1 = "avançar";
       option1.textContent = optionMsg1;
   
       let option2 = document.getElementById("option2");
       let optionMsg2 = "cancelar";
       option2.textContent = optionMsg2;
-    }
-    if(heroSelection == 2){
-      let result = <HTMLInputElement>document.getElementById("textinfos");
-      let message = "\nApós verificar seus equipamentos e itens importantes, você toma coragem e confiança e avança para dentro da Masmorra escura a sua frente com uma Tocha na mão esquerda e uma espada na mão direita\n\nOlhando mais de perto o Corredor a sua frente você consegue ver uma mensagem escrita com sangue na parede onde diz\n\nQUEM ENTRAR NESSA MASMORRA SABERÁ A VERDADE E A VERDADE O DEVORARÁ!\n\n[FIM DA DEMO, OBRIGADO POR TESTAR]"
-      movements.hero2p1();//Teste de Movimento
-      result.value = message;
-
-      let option1 = document.getElementById("option1");
-      let optionMsg1 = "cancelar";
-      option1.textContent = optionMsg1;
-  
-      let option2 = document.getElementById("option2");
-      let optionMsg2 = "cancelar";
-      option2.textContent = optionMsg2;
-    }
   }
+
+  //Resultado Jogador 2
+  if(choose == 'seguir corredor'){
+    let result = <HTMLInputElement>document.getElementById("textinfos");
+    let message = "\nApós verificar seus equipamentos e itens importantes, você toma coragem e confiança e avança para dentro da Masmorra escura a sua frente com uma Tocha na mão esquerda e uma espada na mão direita\n\nVocê sente uma Força enorme te puxando para o Corredor escuro e com uma Força fenomenal, você desaparece dentro do Escuro..."
+    movements.hero2p1();//Teste de Movimento
+    result.value = message;
+
+    let option1 = document.getElementById("option1");
+    let optionMsg1 = "random";
+    option1.textContent = optionMsg1;
+
+    let option2 = document.getElementById("option2");
+    let optionMsg2 = "cancelar";
+    option2.textContent = optionMsg2;
+  }
+
+  //Resultado saindo jogador 1
   if(choose == 'voltar para fora'){
-    if(heroSelection == 2){
-      movements.hero2begin();
+    movements.hero1begin();
+    let result = <HTMLInputElement>document.getElementById("textinfos");
+    let message = "\nPor uma Força maior você reconsidera entrar na Masmorra, talvez por ter sentido algum mal vindo daquele corredor e temendo por sua vida você deseja sair daquele lugar.\n\n Retornando ao seu Cavalo que espera na rua, você consegue ver a chave dourada que você recebeu de seu pai, que por ter escolhido você como o Cavaleiro que iria salvar o Reino de Ludunia tinha esperanças no retorno da Coroa e por isso lhe deu a Chave da cidade para poder voltar a qualquer momento e isso lhe pesou muito na Consciência\n\n O que o Cavaleiro " + heroName + " irá fazer?"
+    result.value = message;
+      
+    //Opção de Lutar
+    let option1 = document.getElementById("option1");
+    let optionMsg1 = "voltar a cidade";
+    option1.textContent = optionMsg1;
+
+    //Opção de Voltar para dentro
+    let option2 = document.getElementById("option2");
+    let optionMsg2 = "voltar para dentro";
+    option2.textContent = optionMsg2;
+  }
+
+
+  //Resultado saindo jogador 2
+  if(choose == "voltar pela caverna"){
+    movements.hero2begin();
       let result = <HTMLInputElement>document.getElementById("textinfos");
       let message = "\nVocê desiste de querer entrar na Masmorra e consegue voltar para a Saída da caverna por onde você entrou.\n\nApós ver a luz do sol novamente, você consegue ver um grupo de Mercenários vindo em sua Direção, onde o Líder deles fala:\n[LÍDER]: O que você está fazendo fora da caverna? O seu Rei nos contratou para ficarmos de olho em você e para não deixar que você saia da Masmorra sem a Coroa, volte lá para dentro imediatamente ou teremos que usar a força\n\n O que o Cavaleiro " + heroName + " irá fazer?"
       result.value = message;
@@ -399,35 +460,20 @@ function moveTest(choose: string){
 
       //Opção de Voltar para dentro
       let option2 = document.getElementById("option2");
-      let optionMsg2 = "voltar para dentro";
+      let optionMsg2 = "retornar para dentro";
       option2.textContent = optionMsg2;
-    }
-    if(heroSelection == 1){
-      movements.hero1begin();
-      let result = <HTMLInputElement>document.getElementById("textinfos");
-      let message = "\nPor uma Força maior você reconsidera entrar na Masmorra, talvez por ter sentido algum mal vindo daquele corredor e temendo por sua vida você deseja sair daquele lugar.\n\n Retornando ao seu Cavalo que espera na rua, você consegue ver a chave dourada que você recebeu de seu pai, que por ter escolhido você como o Cavaleiro que iria salvar o Reino de Ludunia tinha esperanças no retorno da Coroa e por isso lhe deu a Chave da cidade para poder voltar a qualquer momento e isso lhe pesou muito na Consciência\n\n O que o Cavaleiro " + heroName + " irá fazer?"
-      result.value = message;
-      
-      //Opção de Lutar
-      let option1 = document.getElementById("option1");
-      let optionMsg1 = "voltar a cidade";
-      option1.textContent = optionMsg1;
-
-      //Opção de Voltar para dentro
-      let option2 = document.getElementById("option2");
-      let optionMsg2 = "voltar para dentro";
-      option2.textContent = optionMsg2;
-    }
   }
+
+  //Resultado luta jogador 2
   if(choose == "lutar com mercenarios"){
     let result = <HTMLInputElement>document.getElementById("textinfos");
     let message = "\n[GAME OVER]\n\nPor serem um número muito maior que você e muito mais armados, foi simplesmente um Massacre, onde o Cavaleiro " + heroName + " Faleceu após uma luta breve e curta!\n\n Digite [cancelar] para reiniciar o Jogo"
     result.value = message;
     
     //Retirando a Vida
-    vida = 0;
+    player2.life = 0;
     let dados = document.getElementById("tittle");
-    dados.textContent = heroName + " : " + vida.toString() + " / " + maxVida.toString();
+    dados.textContent = player2.name + " : " + player2.life.toString() + " / " + player2.maxlife.toString();
   
     let option1 = document.getElementById("option1");
     let optionMsg1 = "cancelar";
@@ -436,6 +482,8 @@ function moveTest(choose: string){
     let optionMsg2 = "cancelar";
     option2.textContent = optionMsg2;
   }
+
+  //Resultado final jogador 1
   if(choose == "voltar a cidade"){
     let result = <HTMLInputElement>document.getElementById("textinfos");
     let message = "\n[GAME OVER]\n\nApós uma Jornada exaustiva de volta para o seu Reino de mãos vazias, você consegue ver ao longe que a Capital do Reino de Ludunia, onde ficava o seu pai, estava em chamas!\n\nCavalgando mais forte para chegar em casa você consegue ver melhor que a Bandeira encontrada na frente da Cidade é do Reino inimigo de Ludunia,com isso, você finalmente entendeu que haviam mandado um Cavaleiro do Reino do Rei Gandalf e haviam recuperado a Coroa e voltaram para conquistar o trono de Ludunia, onde o povo foi dizimado e seu pai também, deixando você como o último Cavaleiro de Ludunia e odiado por todos por ter Desertado \n\n Digite [cancelar] para reiniciar o Jogo"
@@ -449,6 +497,8 @@ function moveTest(choose: string){
     let optionMsg2 = "cancelar";
     option2.textContent = optionMsg2;
   }
+
+  //Resultado jogador 1
   if(choose == "voltar para dentro"){
     let result = <HTMLInputElement>document.getElementById("textinfos");
     let message = "\nVendo que por Forças Maiores era necessário voltar para a Masmorra, aproveitou um ultimo momento para respirar ar Fresco e pegar um Sol e retornou para dentro para ver o que se esconde na escuridão subterrânea";
@@ -460,6 +510,21 @@ function moveTest(choose: string){
     option1.textContent = optionMsg1;
     let option2 = document.getElementById("option2");
     let optionMsg2 = "seguir reto";
+    option2.textContent = optionMsg2;
+  }
+
+  //Resultado jogador 2
+  if(choose == "retornar para dentro"){
+    let result = <HTMLInputElement>document.getElementById("textinfos");
+    let message = "\nVendo que por Forças Maiores era necessário voltar para a Masmorra, aproveitou um ultimo momento para respirar ar Fresco e pegar um Sol e retornou para dentro para ver o que se esconde na escuridão subterrânea";
+    result.value = message;
+
+    //Opção de continuação
+    let option1 = document.getElementById("option1");
+    let optionMsg1 = "seguir corredor";
+    option1.textContent = optionMsg1;
+    let option2 = document.getElementById("option2");
+    let optionMsg2 = "seguir corredor";
     option2.textContent = optionMsg2;
   }
 
