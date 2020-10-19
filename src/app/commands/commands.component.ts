@@ -16,6 +16,7 @@ var heroName: string = null;
 var vida: number = null;
 var maxVida: number = null;
 var heroSelection: number = 0; // 1 é o Azul e 2 é o Vermelho
+var player: number = 0; //para definir qual player
 
 // Objeto Player 1
 interface Player1 {
@@ -67,8 +68,8 @@ function commandManager(option: string){
     case 'cancelar': {reset(); break;}
     
     // ESCOLHER PERSONAGEM
-    case 'jogador 1' : {selection(option); break;}
-    case 'jogador 2' : {selection(option); break;}
+    case 'jogador 1' : {player = 1; selection(option); break;}
+    case 'jogador 2' : {player = 2; selection(option); break;}
     case 'definir 1' : {selection(option); break;}
     case 'definir 2' : {selection(option); break;}
     case 'azul' : {selection(option); break;}
@@ -146,6 +147,8 @@ function reset(){
   player2.life = 0;
   player1.maxlife = 0;
   player2.maxlife = 0;
+  console.log('Resetado Jogador 1',player1.heroSelection);
+  console.log('Resetado Jogador 2',player2.heroSelection);
 
   // Mensagem
   let result = <HTMLInputElement>document.getElementById("textinfos");
@@ -227,6 +230,7 @@ function selection(entrance: string){
       result.value += mensagem;
     }
   }
+  console.log('Jogador ',player,' Selecionado');
 
   // Resposta
   if(entrance == 'azul'){
@@ -236,9 +240,10 @@ function selection(entrance: string){
     heroSelection = 1;
 
     //Salvando a Escolha
-    if(player1.heroSelection == 0){
+    if(player == 1){
       player1.heroSelection = heroSelection;
-    }else{
+    }
+    if(player == 2){
       player2.heroSelection = heroSelection;
     }
 
@@ -249,10 +254,12 @@ function selection(entrance: string){
     result.value = mensagem;
     heroSelection = 2;
     
-    if(player1.heroSelection == 0){
+    //Salvando a Escolha
+    if(player == 1){
       player1.heroSelection = heroSelection;
-    }else{
-      player2.heroSelection = heroSelection
+    }
+    if(player == 2){
+      player2.heroSelection = heroSelection;
     }
   }
 
@@ -278,6 +285,9 @@ function defineName1(name: string){
   player1.life = vida;
   maxVida = 100;
   player1.maxlife = maxVida;
+
+  console.log('Valor do Jogador 1 no defineName1: ',player1.heroSelection);
+  console.log('Valor do Jogador 2 no defineName1: ',player2.heroSelection);
 
   //Alterando Valor no Título
   if(player1.heroSelection == 1){
@@ -339,6 +349,9 @@ function defineName2(name: string){
   player2.life = vida;
   maxVida = 100;
   player2.maxlife = maxVida;
+
+  console.log('Valor do Jogador 1 no defineName2: ',player1.heroSelection);
+  console.log('Valor do Jogador 2 no defineName2: ',player2.heroSelection);
 
   //Alterando Valor no Título
   if(player2.heroSelection == 1){

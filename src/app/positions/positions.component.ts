@@ -33,7 +33,7 @@ export class PositionsComponent implements OnInit{
   @HostListener('document:keypress', ['$event'])
   handleKeyboardEvent(event: KeyboardEvent){
     this.enter = event.keyCode;
-    console.log(event.keyCode);
+    //console.log(event.keyCode);
     if(this.enter == 13){ // 13 é o Enter do Teclado
 
       // Pega todos os dados do id entrada (input de comandos)
