@@ -616,6 +616,12 @@ function moveTest(choose: string){
 
 function randomMove(){
   var value =  Math.floor(Math.random() * 27);
+
+  let result = <HTMLInputElement>document.getElementById("textinfos");
+  let message = "\nValor do Dado: " + value.toString();
+  result.value += message;
+
+
   switch(value){
     case 0: {movements.hero1begin(); break;}
     case 1: {movements.hero1p1(); break;}
@@ -649,6 +655,11 @@ function randomMove(){
 
 function randomMove2(){
   var value =  Math.floor(Math.random() * 25);
+
+  let result = <HTMLInputElement>document.getElementById("textinfos");
+  let message = "\nValor do Dado: " + value.toString();
+  result.value += message;
+  
   switch(value){
     case 0: {movements.hero2begin(); break;}
     case 1: {movements.hero2p1(); break;}
